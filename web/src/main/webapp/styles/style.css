@@ -1,0 +1,249 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
+	{
+	border: 0 none;
+	font: inherit;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section
+	{
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol,ul {
+	list-style: none outside none;
+}
+
+blockquote,q {
+	quotes: none;
+}
+
+blockquote:before,blockquote:after,q:before,q:after {
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+.minimalist {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin: 20px;
+    text-align: left;
+}
+
+.minimalist td {
+    border-bottom: 1px solid #CCCCCC;
+    color: #666699;
+    vertical-align: top;
+    padding: 6px 8px;
+}
+
+body {
+	background: url("../images/body-bg.png") repeat scroll 0 0 transparent;
+	color: #838383;
+	font: 13px "Droid Sans", Arial, Helvetica, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	color: #434853;
+	font-family: "Droid Sans", sans-serif;
+	font-weight: 700;
+	letter-spacing: -0.5px;
+	text-shadow: 0 1px 0 #FFFFFF;
+}
+
+h1 {
+	border-bottom: 1px solid #E0E0E0;
+	color: #2D932B;
+	font-size: 20px;
+	padding: 0 0 13px;
+}
+
+h2 {
+	font-size: 24px;
+}
+
+h3 {
+	font-size: 17px;
+}
+
+h4 {
+	font-size: 14px;
+}
+
+h5 {
+	font-size: 12px;
+}
+
+h6 {
+	font-size: 10px;
+}
+
+input,textarea {
+	color: #57595D;
+	font-family: tahoma, arial;
+	font-size: 12px;
+	outline: medium none;
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	line-height: 20px;
+}
+
+#box_bg {
+	background: none repeat scroll 0 0 #F9F9F9;
+	border: 1px solid #D5D5D5;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 0 0 2px #DADADA, 0 -3px 0 #E6E6E6 inset;
+	display: block;
+	margin: 100px auto 0;
+	width: 380px;
+}
+
+#content {
+	padding: 23px 28px;
+}
+
+.btn_1 {
+	color: #FFFFFF;
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	height: 32px;
+	padding: 8px 0 0 35px;
+	text-shadow: -1px -1px 0 #0083B3;
+}
+
+.btn_2 {
+	color: #FFFFFF;
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	height: 32px;
+	padding: 8px 0 0 31px;
+	text-shadow: -1px -1px 0 #366C96;
+}
+
+.button {
+	border-radius: 3px 3px 3px 3px;
+	display: inline-block;
+}
+
+.button a {
+	color: #FFFFFF;
+	display: block;
+	font-size: 14px;
+	font-weight: 700;
+	padding: 9px 26px 8px;
+}
+
+.button.green {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #49AC47;
+	background-image: -moz-linear-gradient(center bottom, #2D922B 0%, #58BD56 100%);
+	border-color: #309230 #309230 #166D16;
+	border-image: none;
+	border-style: solid;
+	border-width: 1px 1px 2px;
+	box-shadow: 0 1px 0 #A1DAA0 inset;
+}
+
+.button.blue {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background-color: #2B83B6;
+	background-image: -moz-linear-gradient(center bottom, #2B83B6 0%, #878787 100%);
+	border-color: #878787 #878787 #878787;
+	border-image: none;
+	border-style: solid;
+	border-width: 1px 1px 2px;
+	box-shadow: 0 1px 0 #878787 inset;
+}
+
+.login-box {
+	border-top: 1px solid #E0E0E0;
+	padding: 13px 0 0;
+}
+
+.login {
+	background-color: #FDFDFD;
+	border: 1px solid #D8D8D8;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 2px 2px 4px #F1F1F1 inset;
+	color: #8E8D8D;
+	display: block;
+	font-family: "Droid Sans";
+	font-size: 14px;
+	margin: 3px 0 -3px;
+	padding: 11px 15px 10px 50px;
+	width: 255px;
+}
+
+.spacer {
+	padding-top: 20px
+}
+
+.user {
+	background: url("../images/user.png") no-repeat scroll 0 0 transparent;
+}
+
+.password {
+	background: url("../images/password.png") no-repeat scroll 0 0
+		transparent;
+}
+
+.checkbox {
+	margin: 30px 0 15px;
+}
+
+.checkbox li {
+	height: 15px;
+	list-style: none outside none;
+}
+
+#bottom_text {
+	display: block;
+	line-height: 19px;
+	margin: 12px auto;
+	text-align: center;
+	text-shadow: 1px 1px 0 #FFFFFF;
+	width: 300px;
+}
+
+#bottom_text a {
+	background: url("../images/bullet.png") no-repeat scroll 100% 50%
+		transparent;
+	color: #2D932B;
+	font-weight: 700;
+	padding: 0 8px 0 0;
+}
+
+#bottom_text {
+	color: #878787;
+	transition: all 0.2s linear 0s;
+}
+
+.error {
+	color: #D90036;
+	font-style: italic;
+}

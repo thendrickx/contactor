@@ -1,0 +1,32 @@
+Application features
+
+* User
+** Create new account
+** log in / log out
+* Contacts
+** create new contact
+** list all contacts (supports pagination)
+** edit existing contact
+*** Comments
+**** Add comment to contact
+**** Edit comment from contact
+**** Remove comment from contact
+*** Email address, phoneNumber, address
+**** Add/remove to contact
+**** Modify existing 
+**** Add/remove label
+* Search
+** Search contact by
+*** Name / First name
+*** Email address
+*** Phone number
+*** Address
+*** Label
+** Search Email address, phoneNumber, address by label
+* Merge
+** Find potential duplicates
+*** By name / First name
+*** Email address
+*** Phone number
+*** Address
+** Merge selected duplicates into one contact 
