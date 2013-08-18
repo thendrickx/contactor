@@ -33,6 +33,10 @@
 				<form:label path="lastName">Last Name</form:label>
 				<form:input path="lastName" class="login" />
 				<br />
+				
+				<form:label path="emailAddresses[0].emailAddress">Email Address</form:label>
+				<form:input path="emailAddresses[0].emailAddress" class="login" />
+				<br />
 
 				<button name="submit" type="submit">Save</button>
 

@@ -41,5 +41,13 @@
 	<beans profile="dev">
 		<jdbc:embedded-database id="dataSource" type="H2" />
 	</beans>
-
+	
+	<beans profile="mysql">
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    		<property name="url" value="${mysql.url}" />
+    		<property name="username" value="${mysql.user}" />
+    		<property name="password" value="${mysql.password}" />
+		</bean>
+	</beans>
 </beans>

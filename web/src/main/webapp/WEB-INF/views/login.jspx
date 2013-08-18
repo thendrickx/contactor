@@ -27,7 +27,7 @@
 			<div class="login-box">
 				<c:url var="loginTarget" value="/login" />
 				<form:form modelAttribute="user" id="loginForm" method="post"
-					action="${loginTarget}">
+					action="${loginTarget}" htmlEscape="true">
 
 					<form:label path="emailAddress">Email Address</form:label>
 					<form:input path="emailAddress" class="login user" />

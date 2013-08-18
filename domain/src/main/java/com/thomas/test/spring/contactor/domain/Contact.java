@@ -19,12 +19,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.envers.Audited;
+import org.springframework.util.AutoPopulatingList;
 
 import com.google.common.base.Objects;
+import com.thomas.test.spring.contactor.domain.util.AutopopulatingSet;
 
 @Entity
 @Table(name = "contact")
@@ -35,9 +38,8 @@ public class Contact implements Serializable, Comparable<Contact> {
 
 	@Id
 	@Column(name = "contact_id")
-	@TableGenerator(name = "idGenerator", table = "idGenerator", pkColumnName = "primaryKeyName",
-			valueColumnName = "primaryKeyValue", pkColumnValue = "contact.contact_id",
-			allocationSize = 1)
+	@TableGenerator(name = "idGenerator", table = "idGenerator", pkColumnName = "primaryKeyName", valueColumnName = "primaryKeyValue",
+			pkColumnValue = "contact.contact_id", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "idGenerator")
 	private Long contactId;
 
@@ -64,7 +66,7 @@ public class Contact implements Serializable, Comparable<Contact> {
 	private Set<Comment> comments = new HashSet<Comment>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contact", orphanRemoval = true)
-	private Set<EmailAddress> emailAddresses = new HashSet<EmailAddress>();
+	private Set<EmailAddress> emailAddresses = new AutopopulatingSet<EmailAddress>(EmailAddress.class);
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contact", orphanRemoval = true)
 	private Set<PhoneNumber> phoneNumbers = new HashSet<PhoneNumber>();
@@ -73,20 +75,24 @@ public class Contact implements Serializable, Comparable<Contact> {
 	private Set<Address> addresses = new HashSet<Address>();
 
 	@ManyToMany
-	@JoinTable(name = "contactHasLabels", joinColumns = { @JoinColumn(name = "contact_id",
-			referencedColumnName = "contact_id") }, inverseJoinColumns = { @JoinColumn(
-			name = "label_id", referencedColumnName = "label_id") })
+	@JoinTable(name = "contactHasLabels", joinColumns = { @JoinColumn(name = "contact_id", referencedColumnName = "contact_id") },
+			inverseJoinColumns = { @JoinColumn(name = "label_id", referencedColumnName = "label_id") })
 	private Set<Label> labels = new HashSet<Label>();
 
-	public Contact() {
+	// TRANSIENT ATTRIBUTES
+	// @Transient
+	// private AutoPopulatingList<EmailAddress> autoPopulatingEmailAddresses =
+	// new AutoPopulatingList<EmailAddress>(EmailAddress.class);
 
+	public Contact() {
 	}
 
 	public Long getContactId() {
 		return contactId;
 	}
 
-	public void setContactId(Long contactId) {
+	public void setContactId(
+			Long contactId) {
 		this.contactId = contactId;
 	}
 
@@ -94,7 +100,8 @@ public class Contact implements Serializable, Comparable<Contact> {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(
+			String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -102,7 +109,8 @@ public class Contact implements Serializable, Comparable<Contact> {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setLastName(
+			String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -110,7 +118,8 @@ public class Contact implements Serializable, Comparable<Contact> {
 		return picture;
 	}
 
-	public void setPicture(byte[] picture) {
+	public void setPicture(
+			byte[] picture) {
 		this.picture = picture;
 	}
 
@@ -118,7 +127,8 @@ public class Contact implements Serializable, Comparable<Contact> {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(
+			User user) {
 		this.user = user;
 	}
 
@@ -126,52 +136,77 @@ public class Contact implements Serializable, Comparable<Contact> {
 		return comments;
 	}
 
-	public void setComments(Set<Comment> comments) {
+	public void setComments(
+			Set<Comment> comments) {
 		this.comments = comments;
 	}
 
-	public void addComment(Comment comment) {
+	public void addComment(
+			Comment comment) {
 		comments.add(comment);
 		comment.setContact(this);
 	}
 
-	public void removeComment(Comment comment) {
+	public void removeComment(
+			Comment comment) {
 		comments.remove(comment);
 		comment.setContact(null);
 	}
 
 	public Set<EmailAddress> getEmailAddresses() {
+		// for (EmailAddress address : autoPopulatingEmailAddresses) {
+		// addEmailAddress(address);
+		// }
+
 		return emailAddresses;
 	}
 
-	public void setEmailAddresses(Set<EmailAddress> emailAddresses) {
+	public void setEmailAddresses(
+			Set<EmailAddress> emailAddresses) {
 		this.emailAddresses = emailAddresses;
 	}
 
-	public void addEmailAddress(EmailAddress emailAddress) {
+	public void addEmailAddress(
+			EmailAddress emailAddress) {
 		emailAddresses.add(emailAddress);
 		emailAddress.setContact(this);
 	}
 
-	public void removeEmailAddress(EmailAddress emailAddress) {
+	public void removeEmailAddress(
+			EmailAddress emailAddress) {
 		emailAddresses.remove(emailAddress);
 		emailAddress.setContact(null);
 	}
+
+	// public AutoPopulatingList<EmailAddress> getAutoPopulatingEmailAddresses()
+	// {
+	// autoPopulatingEmailAddresses.clear();
+	// autoPopulatingEmailAddresses.addAll(emailAddresses);
+	// return autoPopulatingEmailAddresses;
+	// }
+	//
+	// public void setAutoPopulatingEmailAddresses(
+	// AutoPopulatingList<EmailAddress> autoPopulatingEmailAddresses) {
+	// this.autoPopulatingEmailAddresses.addAll(autoPopulatingEmailAddresses);
+	// }
 
 	public Set<PhoneNumber> getPhoneNumbers() {
 		return phoneNumbers;
 	}
 
-	public void setPhoneNumbers(Set<PhoneNumber> phoneNumbers) {
+	public void setPhoneNumbers(
+			Set<PhoneNumber> phoneNumbers) {
 		this.phoneNumbers = phoneNumbers;
 	}
 
-	public void addPhoneNumber(PhoneNumber phoneNumber) {
+	public void addPhoneNumber(
+			PhoneNumber phoneNumber) {
 		phoneNumbers.add(phoneNumber);
 		phoneNumber.setContact(this);
 	}
 
-	public void removePhoneNumber(PhoneNumber phoneNumber) {
+	public void removePhoneNumber(
+			PhoneNumber phoneNumber) {
 		phoneNumbers.remove(phoneNumber);
 		phoneNumber.setContact(null);
 	}
@@ -180,16 +215,19 @@ public class Contact implements Serializable, Comparable<Contact> {
 		return addresses;
 	}
 
-	public void setAddresses(Set<Address> addresses) {
+	public void setAddresses(
+			Set<Address> addresses) {
 		this.addresses = addresses;
 	}
 
-	public void addAddress(Address address) {
+	public void addAddress(
+			Address address) {
 		addresses.add(address);
 		address.setContact(this);
 	}
 
-	public void removeAddress(Address address) {
+	public void removeAddress(
+			Address address) {
 		addresses.remove(address);
 		address.setContact(null);
 	}
@@ -198,16 +236,19 @@ public class Contact implements Serializable, Comparable<Contact> {
 		return labels;
 	}
 
-	public void setLabels(Set<Label> labels) {
+	public void setLabels(
+			Set<Label> labels) {
 		this.labels = labels;
 	}
 
-	public void addLabel(Label label) {
+	public void addLabel(
+			Label label) {
 		labels.add(label);
 		label.getContacts().add(this);
 	}
 
-	public void removeLabel(Label label) {
+	public void removeLabel(
+			Label label) {
 		labels.remove(label);
 		label.getContacts().remove(this);
 	}
@@ -219,7 +260,8 @@ public class Contact implements Serializable, Comparable<Contact> {
 	}
 
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(
+			Object other) {
 		if (other != null) {
 			if (other.getClass().isAssignableFrom(Contact.class)) {
 				return Objects.equal(getContactId(), ((Contact) other).getContactId());
@@ -230,7 +272,8 @@ public class Contact implements Serializable, Comparable<Contact> {
 	}
 
 	@Override
-	public int compareTo(Contact other) {
+	public int compareTo(
+			Contact other) {
 		if (other != null) {
 			return getContactId().compareTo(other.getContactId());
 		} else {
@@ -240,7 +283,6 @@ public class Contact implements Serializable, Comparable<Contact> {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper("Contact").add("firstName", getFirstName())
-				.add("lastName", getLastName()).toString();
+		return Objects.toStringHelper("Contact").add("firstName", getFirstName()).add("lastName", getLastName()).toString();
 	}
 }

@@ -14,45 +14,79 @@ import com.thomas.test.spring.contactor.domain.User;
 
 public interface ContactService {
 
-	public Contact save(User user, Contact contact);
+	public Contact save(
+			User user,
+			Contact contact);
 
-	public Set<Contact> findAllContactsForUser(User user);
+	public Set<Contact> findAllContactsForUser(
+			User user);
 
-	public Page<Contact> findAllContactsForUser(User user, Pageable pageable);
+	public Page<Contact> findAllContactsForUser(
+			User user,
+			Pageable pageable);
 
 	// ////////////////////////////////
 	// ADD
 	// ////////////////////////////////
 
-	public Contact addCommentToContact(Contact contact, Comment comment);
+	public Contact addCommentToContact(
+			Contact contact,
+			Comment comment);
 
-	public Contact addEmailAddressToContact(Contact contact, EmailAddress emailAddress);
+	public Contact addEmailAddressToContact(
+			Contact contact,
+			EmailAddress emailAddress);
 
-	public Contact addAddressToContact(Contact contact, Address address);
+	public Contact addAddressToContact(
+			Contact contact,
+			Address address);
 
-	public Contact addPhoneNumberToContact(Contact contact, PhoneNumber phoneNumber);
+	public Contact addPhoneNumberToContact(
+			Contact contact,
+			PhoneNumber phoneNumber);
 
 	// ////////////////////////////////
 	// REMOVE
 	// ////////////////////////////////
 
-	public Contact removeCommentFromContact(Contact contact, Comment comment);
+	public Contact removeCommentFromContact(
+			Contact contact,
+			Comment comment);
 
-	public Contact removeEmailAddressFromContact(Contact contact, EmailAddress emailAddress);
+	public Contact removeEmailAddressFromContact(
+			Contact contact,
+			EmailAddress emailAddress);
 
-	public Contact removeAddressFromContact(Contact contact, Address address);
+	public Contact removeAddressFromContact(
+			Contact contact,
+			Address address);
 
-	public Contact removePhoneNumberFromContact(Contact contact, PhoneNumber phoneNumber);
+	public Contact removePhoneNumberFromContact(
+			Contact contact,
+			PhoneNumber phoneNumber);
 
 	// ////////////////////////////////
 	// MODIFY
 	// ////////////////////////////////
 
-	public void modifyComment(Comment comment);
+	public void modifyComment(
+			Comment comment);
 
-	public void modifyEmailAddress(EmailAddress emailAddress);
+	public void modifyEmailAddress(
+			EmailAddress emailAddress);
 
-	public void modifyAddress(Address address);
+	public void modifyAddress(
+			Address address);
 
-	public void modifyPhoneNumber(PhoneNumber phoneNumber);
+	public void modifyPhoneNumber(
+			PhoneNumber phoneNumber);
+
+	/**
+	 * Goes through each of the contact's attribute (address, email, comment,
+	 * phone numbers etc. and removes the empty ones.
+	 * 
+	 * @param contact
+	 */
+	public void removeEmptyAttributes(
+			Contact contact);
 }

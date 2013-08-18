@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.thomas.test.spring.contactor.domain.Address;
 import com.thomas.test.spring.contactor.domain.Comment;
@@ -34,9 +35,14 @@ public class ContactServiceImpl implements ContactService {
 	private EntityManager em;
 
 	@Override
-	public Contact save(User user, Contact contact) {
+	public Contact save(
+			User user,
+			Contact contact) {
 		user = em.<User> merge(user);
 		user.addContact(contact);
+
+		removeEmptyAttributes(contact);
+
 		if (contact.getContactId() == null) {
 			// Insert new transient object
 			em.persist(contact);
@@ -50,12 +56,15 @@ public class ContactServiceImpl implements ContactService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public Set<Contact> findAllContactsForUser(User user) {
+	public Set<Contact> findAllContactsForUser(
+			User user) {
 		return ImmutableSet.<Contact> copyOf(contactRepository.findByUser(user));
 	}
 
 	@Override
-	public Page<Contact> findAllContactsForUser(User user, Pageable pageable) {
+	public Page<Contact> findAllContactsForUser(
+			User user,
+			Pageable pageable) {
 		return contactRepository.findByUser(user, pageable);
 	}
 
@@ -64,7 +73,9 @@ public class ContactServiceImpl implements ContactService {
 	// ////////////////////////////////
 
 	@Override
-	public Contact addCommentToContact(Contact contact, Comment comment) {
+	public Contact addCommentToContact(
+			Contact contact,
+			Comment comment) {
 		contact.addComment(comment);
 		em.persist(comment);
 		em.merge(contact);
@@ -73,7 +84,9 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public Contact addEmailAddressToContact(Contact contact, EmailAddress emailAddress) {
+	public Contact addEmailAddressToContact(
+			Contact contact,
+			EmailAddress emailAddress) {
 		contact.addEmailAddress(emailAddress);
 		em.persist(emailAddress);
 		em.merge(contact);
@@ -82,7 +95,9 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public Contact addAddressToContact(Contact contact, Address address) {
+	public Contact addAddressToContact(
+			Contact contact,
+			Address address) {
 		contact.addAddress(address);
 		em.persist(address);
 		em.merge(contact);
@@ -91,7 +106,9 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public Contact addPhoneNumberToContact(Contact contact, PhoneNumber phoneNumber) {
+	public Contact addPhoneNumberToContact(
+			Contact contact,
+			PhoneNumber phoneNumber) {
 		contact.addPhoneNumber(phoneNumber);
 		em.persist(phoneNumber);
 		em.merge(contact);
@@ -104,7 +121,9 @@ public class ContactServiceImpl implements ContactService {
 	// ////////////////////////////////
 
 	@Override
-	public Contact removeCommentFromContact(Contact contact, Comment comment) {
+	public Contact removeCommentFromContact(
+			Contact contact,
+			Comment comment) {
 		contact.removeComment(comment);
 		em.merge(contact);
 
@@ -112,7 +131,9 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public Contact removeEmailAddressFromContact(Contact contact, EmailAddress emailAddress) {
+	public Contact removeEmailAddressFromContact(
+			Contact contact,
+			EmailAddress emailAddress) {
 		contact.removeEmailAddress(emailAddress);
 		em.merge(contact);
 
@@ -120,7 +141,9 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public Contact removeAddressFromContact(Contact contact, Address address) {
+	public Contact removeAddressFromContact(
+			Contact contact,
+			Address address) {
 		contact.removeAddress(address);
 		em.merge(contact);
 
@@ -128,7 +151,9 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public Contact removePhoneNumberFromContact(Contact contact, PhoneNumber phoneNumber) {
+	public Contact removePhoneNumberFromContact(
+			Contact contact,
+			PhoneNumber phoneNumber) {
 		contact.removePhoneNumber(phoneNumber);
 		em.merge(contact);
 
@@ -140,23 +165,39 @@ public class ContactServiceImpl implements ContactService {
 	// ////////////////////////////////
 
 	@Override
-	public void modifyComment(Comment comment) {
+	public void modifyComment(
+			Comment comment) {
 		em.merge(comment);
 	}
 
 	@Override
-	public void modifyEmailAddress(EmailAddress emailAddress) {
+	public void modifyEmailAddress(
+			EmailAddress emailAddress) {
 		em.merge(emailAddress);
 	}
 
 	@Override
-	public void modifyAddress(Address address) {
+	public void modifyAddress(
+			Address address) {
 		em.merge(address);
 	}
 
 	@Override
-	public void modifyPhoneNumber(PhoneNumber phoneNumber) {
+	public void modifyPhoneNumber(
+			PhoneNumber phoneNumber) {
 		em.merge(phoneNumber);
+	}
+
+	@Override
+	public void removeEmptyAttributes(
+			Contact contact) {
+
+		for (EmailAddress address : contact.getEmailAddresses()) {
+			if (Strings.isNullOrEmpty(address.getEmailAddress())) {
+				contact.removeEmailAddress(address);
+			}
+		}
+
 	}
 
 }
